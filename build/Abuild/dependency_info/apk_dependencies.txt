@@ -1,0 +1,7 @@
+abuild=3.15.0-r8
+qnx-gcc=8.0.3-r15
+build-base=0.1-r0
+qnx-packaging
+gawk
+bc
+bzip2-dev

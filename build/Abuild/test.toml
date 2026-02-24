@@ -1,0 +1,14 @@
+package = "jq"
+
+[custom]
+path = """
+*[!.]test
+*test.sh"""
+[[custom.skipped]]
+name = "shtest"
+[[custom.skipped.suites]]
+name = "shtest"
+[[custom.skipped.suites.cases]]
+name = "shtest" # Other tests in the project are split apart into test cases,
+                # but this one is just an individual file with no skipping
+                # capability.

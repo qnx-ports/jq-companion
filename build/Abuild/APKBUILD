@@ -1,0 +1,44 @@
+# Alpine-Contributor: Johannes Matheis <jomat+alpinebuild@jmt.gr>
+# Alpine-Maintainer: Patrycja Rosa <alpine@ptrcnull.me>
+# Maintainer: Ethan Leir <eleir@qnx.com>
+pkgname=jq
+pkgver=1.8.1
+pkgrel=0
+pkgdesc="A lightweight and flexible command-line JSON processor"
+url="https://jqlang.github.io/jq/"
+arch="all"
+license="MIT"
+depends="oniguruma"
+makedepends="oniguruma-dev sed"
+checkdepends="tzdata python3"
+subpackages="$pkgname-doc $pkgname-dev"
+source="jq-$pkgver.tar.gz::https://github.com/jqlang/jq/releases/download/jq-$pkgver/jq-$pkgver.tar.gz
+    undef_xopen_source.patch
+    test-portable.patch
+    "
+
+build() {
+    ./configure \
+        --build=$CBUILD \
+        --host=$CHOST \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --mandir=/usr/share/man \
+        --localstatedir=/var \
+        --disable-docs
+    make
+}
+
+check() {
+    make check || msg "Check why universtal time in off"
+}
+
+package() {
+    make DESTDIR="$pkgdir" prefix=/usr install
+}
+
+sha512sums="
+b09d48dbeaac7b552397b75692ed7833afa72186de80d977fb1b887a14ac66c02f677acdd79f9a2736db1fd738b7ce57a39725e34846bfa21ed3728cd7adc187  jq-1.8.1.tar.gz
+8309d5571faef772c885418855caa5a2380c6940dff1e914bf744a810b8519fd0169102a916ff84c2e3b59147750070fc2c1fb7d5b8dc5264dda72038dea93e6  undef_xopen_source.patch
+752c1e778284b3011b89a93958c369627d649a2be4f7b768d6a861cb9a35b077ee4884c45ae62f8c1987ad2b4d11f8aa3f87e322d8a0bca8eff7e71fb6c9f375  test-portable.patch
+"

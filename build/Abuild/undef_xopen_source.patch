@@ -1,0 +1,13 @@
+diff --git a/src/builtin.c b/src/builtin.c
+index 5787ca8..071aa44 100644
+--- a/src/builtin.c
++++ b/src/builtin.c
+@@ -1,5 +1,7 @@
+ #ifndef __sun__
+-# define _XOPEN_SOURCE
++# ifndef __QNX__
++#  define _XOPEN_SOURCE
++# endif
+ # define _XOPEN_SOURCE_EXTENDED 1
+ #else
+ # define _XPG6
