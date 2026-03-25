@@ -3,7 +3,7 @@
 # Maintainer: Ethan Leir <eleir@qnx.com>
 pkgname=jq
 pkgver=1.8.1
-pkgrel=${pkgrel:-0}
+pkgrel=0
 pkgdesc="A lightweight and flexible command-line JSON processor"
 url="https://jqlang.github.io/jq/"
 arch="all"
@@ -37,7 +37,6 @@ package() {
     make DESTDIR="$pkgdir" prefix=/usr install
 }
 
-options="$options ${DISABLE_CHECK:+!check}"
 sha512sums="
 b09d48dbeaac7b552397b75692ed7833afa72186de80d977fb1b887a14ac66c02f677acdd79f9a2736db1fd738b7ce57a39725e34846bfa21ed3728cd7adc187  jq-1.8.1.tar.gz
 8309d5571faef772c885418855caa5a2380c6940dff1e914bf744a810b8519fd0169102a916ff84c2e3b59147750070fc2c1fb7d5b8dc5264dda72038dea93e6  undef_xopen_source.patch
